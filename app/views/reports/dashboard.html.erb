@@ -1,0 +1,9 @@
+<%= page_header('Dashboard', 'last 3 days') %>
+
+<%= render partial: 'dashboard_website', collection: current_user.websites, locals: {reports: @reports} %>
+
+<% if current_user.websites.empty? %>
+  <%= blank_slate('Your dashboard will appear here.',
+    '... after you add a website to monitor. Go ahead and click the button below to add your first website.',
+    'Create a new website', new_website_path) %>
+<% end %>

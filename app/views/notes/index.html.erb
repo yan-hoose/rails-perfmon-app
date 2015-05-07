@@ -1,0 +1,39 @@
+<h2>Notes</h2>
+
+<% if @website.notes.length.zero? %>
+  <%= blank_slate('Your notes will appear here.',
+    'A note is a simple text about changes that you have made to your website. Notes will be visible on the graphs as verical lines and will help you quickly see if a change you made resulted in performace changes.',
+    'Add a note', new_website_note_path(@website)) %>
+<% else %>
+  <div class="row more-margin">
+    <div class="col-xs-12"><%= link_to 'Add a note', new_website_note_path(@website), class: 'btn btn-primary' %></div>
+  </div>
+
+  <div class="row more-margin">
+    <div class="col-xs-12 col-sm-10 col-md-8">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th class="col-md-3">Time</th>
+              <th>Text</th>
+              <th class="col-md-2">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @website.notes.each do |note| %>
+            <tr>
+              <td><%= l note.time %></td>
+              <td><%= nl2br note.text %></td>
+              <td>
+                <%= link_to 'Edit', edit_website_note_path(@website, note) %>
+                <%= link_to 'Delete', website_note_path(@website, note), method: :delete, data: {confirm: 'Are you sure?'} %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>

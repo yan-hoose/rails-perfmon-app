@@ -1,0 +1,140 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+@import "common";
+@import "daterangepicker-bs3";
+
+/* Bootstrap overrides */
+
+.page-header {
+  margin-top: 25px;
+}
+
+/* Bootstrap overrides end */
+
+.more-margin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.page-header-with-navbar > h1 {
+  display: inline-block;
+}
+
+.page-header-with-navbar > ul {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.daterange-str {
+  margin: 0 10px
+}
+
+#date-filter-container > * {
+  clear: right;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+#compare-periods-checkbox {
+  margin-right: 5px;
+}
+
+.chart-container {
+  padding-top: 35px;
+}
+
+.chart {
+  background-color: #F9F9F9;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+.loading-chart-data {
+  vertical-align: middle;
+  line-height: 300px;
+  font-size: 20px;
+}
+
+.chart-note {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  font-size: 12px;
+  color: #333333;
+  border: 1px solid $brand-primary;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 3px 5px;
+  box-shadow: 1px 1px 3px #AAAAAA;
+}
+
+.request-table-heading-with-filters {
+  display: block;
+  h3 {
+    display: inline-block;
+  }
+  a {
+    margin-bottom: 10px;
+    margin-left: 15px;
+  }
+}
+
+.overview-stat-block {
+  margin-top: 20px;
+}
+
+.overview-stat {
+  font-size: 36px;
+  font-weight: bold;
+  display: block;
+  small {
+    font-weight: normal;
+  }
+}
+
+.dashboard-stat {
+  font-size: 28px;
+  font-weight: bold;
+  display: block;
+  small {
+    font-weight: normal;
+  }
+}
+
+.btn-back {
+  margin-left: 10px;
+}
+
+/* SORTABLE TABLE */
+
+th.sort-header {
+  cursor: pointer;
+  color: $brand-primary;
+}
+
+.sort-up::after, .sort-down::after {
+  font-family:"Glyphicons Halflings";
+  margin-left: 5px;
+  vertical-align: bottom;
+}
+.sort-up::after {
+  content:"\e114";
+}
+.sort-down::after {
+  content:"\e113";
+}
+
+/* END SORTABLE TABLE */

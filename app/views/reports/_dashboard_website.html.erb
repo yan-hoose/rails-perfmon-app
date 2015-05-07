@@ -1,0 +1,10 @@
+<h2><%= link_to(dashboard_website.name, overview_website_reports_path(dashboard_website)) %> <small><%= dashboard_website.url %></small></h2>
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <%= dashboard_stat_block(reports[dashboard_website.id], :nth_percentile, '%d ms', '95th percentile request time') %>
+    <%= dashboard_stat_block(reports[dashboard_website.id], :requests_per_minute, '%.1f rpm', 'Throughput (requests / min)') %>
+  </div>
+  <div class="col-xs-12 col-sm-8">
+    <%= chart_without_container(dashboard_website, class: 'chart dashboard-chart') %>
+  </div>
+</div>

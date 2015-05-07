@@ -1,0 +1,8 @@
+<tr>
+  <td><%= filter_link(table_row) %></td>
+  <td><%= table_row.hits %></td>
+  <td data-sort="<%= table_row.sum %>"><%= duration_in_human(table_row.sum) %></td>
+  <td><%= table_row.avg.round %></td>
+  <td><%= table_row.min.round %></td>
+  <td><%= table_row.max.round %></td>
+</tr>

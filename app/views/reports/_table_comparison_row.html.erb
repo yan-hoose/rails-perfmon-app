@@ -1,0 +1,8 @@
+<tr>
+  <td><%= filter_link(table_comparison_row) %></td>
+  <td data-sort="<%= table_comparison_row.hits %>"><%= table_comparison_row.hits %><%= comparison_value(table_comparison_row, :hits, true) %></td>
+  <td data-sort="<%= table_comparison_row.sum %>"><%= duration_in_human(table_comparison_row.sum) %></td>
+  <td data-sort="<%= table_comparison_row.avg %>"><%= table_comparison_row.avg.round %><%= comparison_value(table_comparison_row, :avg) %></td>
+  <td data-sort="<%= table_comparison_row.min %>"><%= table_comparison_row.min.round %><%= comparison_value(table_comparison_row, :min) %></td>
+  <td data-sort="<%= table_comparison_row.max %>"><%= table_comparison_row.max.round %><%= comparison_value(table_comparison_row, :max) %></td>
+</tr>

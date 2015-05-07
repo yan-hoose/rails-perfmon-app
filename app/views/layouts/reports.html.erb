@@ -1,0 +1,5 @@
+<%= render partial: 'layouts/header' %>
+  <%= show_flash %>
+  <%= page_header_with_navbar(@website) %>
+  <%= yield %>
+<%= render partial: 'layouts/footer' %>

@@ -1,0 +1,6 @@
+<h2>Confirm website delete</h2>
+
+<div class="alert alert-danger" role="alert"><strong>Permanently delete</strong> the website and all the data collected?</div>
+
+<%= link_to 'Yes, delete website', website_path(@website), method: :delete, class: 'btn btn-danger' %>
+<%= link_to 'NO, get me out of here!', edit_website_path(@website), class: 'btn btn-primary' %>

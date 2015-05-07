@@ -1,0 +1,6 @@
+<%= websites_sub_menu_with_date_filter(@website, @result_data.filters) %>
+
+<div id="data-container">
+  <%= chart('db-runtime-chart', @website) %>
+  <%= render partial: 'sum_avg_min_max_table', locals: {table_heading: 'Database runtimes'} %>
+</div>

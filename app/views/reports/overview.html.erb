@@ -1,0 +1,83 @@
+<%= websites_sub_menu_with_date_filter(@website, @result_data.filters) %>
+
+<div id="data-container">
+  <%= chart('nr-of-requests-chart', @website) %>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row overview-stat-block">
+        <%= overview_stat_block(:nth_percentile, '%d ms', '95th percentile request time', false) %>
+        <%= overview_stat_block(:requests_per_minute, '%.1f rpm', 'Throughput (requests / min)', true) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-7">
+      <div class="request-table-heading-with-filters">
+        <h3>Most requested</h3>
+        <%= show_filters %>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Hits</th>
+            <th>%</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @result_data.tabular_data.each do |req| %>
+          <tr>
+            <td><%= filter_link(req) %></td>
+            <td><%= req.hits %><%= comparison_value(req, :hits, true) if @result_data.filters[:compare_periods] %></td>
+            <td><%= ((req.hits * 1.0 / @result_data.total_hits) * 100).round %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-xs-5">
+      <h3>HTTP methods</h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Hits</th>
+            <th>%</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @http_methods.each do |method, hits| %>
+          <tr>
+            <td><%= method %></td>
+            <td><%= hits %></td>
+            <td><%= ((hits * 1.0 / @result_data.total_hits) * 100).round %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <h3>HTTP statuses</h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Hits</th>
+            <th>%</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @http_statuses.each do |status, hits| %>
+          <tr>
+            <td><%= status %></td>
+            <td><%= hits %></td>
+            <td><%= ((hits * 1.0 / @result_data.total_hits) * 100).round %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

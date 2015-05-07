@@ -1,0 +1,32 @@
+<%= websites_sub_menu_with_date_filter(@website, @result_data.filters) %>
+
+<div id="data-container">
+  <%= chart('blocker-count-chart', @website) %>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="request-table-heading-with-filters">
+        <h3>Process blockers (>= 1 sec duration)</h3>
+        <%= show_filters %>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th>Action</th>
+          <th>Hits</th>
+          <th>%</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @result_data.tabular_data.each do |req| %>
+          <tr>
+            <td><%= filter_link(req) %></td>
+            <td><%= req.count %><%= comparison_value(req, :count, false) if @result_data.filters[:compare_periods] %></td>
+            <td><%= ((req.count * 1.0 / @overall_blocker_count) * 100).round %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

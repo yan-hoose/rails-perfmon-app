@@ -1,0 +1,22 @@
+<h2>Settings</h2>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <%= render :partial => 'form' %>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h3>API key</h3>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+        <%= text_field_tag :api_key, @website.api_key, class: 'form-control' %>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-2">
+        <%= link_to 'Regenerate', regenerate_api_key_website_path(@website), class: 'btn btn-warning', data: {confirm: 'Are you sure?'} %>
+      </div>
+    </div>
+
+    <h3>Delete website</h3>
+    <p>Permanently delete the website and all the data collected.</p>
+    <%= link_to 'Delete website', confirm_delete_website_path(@website), class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+  </div>
+</div>
