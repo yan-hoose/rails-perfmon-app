@@ -2,6 +2,10 @@
 
 The job of this application is to monitor the performance of your Rails apps. It does this by collecting request duration data from your apps and displaying the information in a human readable form.
 
+### Demo
+
+A demo application can be found at https://perfmon-demo.herokuapp.com. Use "demo@example.com" as email and "demodemo" as password to log in.
+
 ### How it works
 
 This app works in conjunction with the [data collecting gem](https://github.com/yan-hoose/rails-perfmon). First you set up this app and then use the gem to send data to this app.
