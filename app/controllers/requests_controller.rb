@@ -10,6 +10,7 @@ class RequestsController < ApplicationController
         objects = ActiveSupport::JSON.decode(params[:requests])
         objects.each do |obj|
           obj['view_runtime'] ||= 0
+          obj['format'] ||= 'html'
           begin
             website.requests.create!(obj)
           rescue

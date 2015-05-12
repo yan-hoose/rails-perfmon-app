@@ -29,6 +29,15 @@ RSpec.describe RequestsController, :type => :controller do
       expect(Request.last.view_runtime).to eq(0)
     end
 
+    it 'sets request format as html when format is missing' do
+      reqs = [] << FactoryGirl.attributes_for(:request).merge(format: nil)
+      expect {
+        post :create, api_key: @website.api_key, requests: reqs.to_json
+      }.to change(Request, :count).by(1)
+      expect(response).to have_http_status(200)
+      expect(Request.last.format).to eq('html')
+    end
+
     context 'invalid data' do
       after(:each) do
         expect(response).to have_http_status(400)
