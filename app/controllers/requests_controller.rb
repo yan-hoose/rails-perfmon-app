@@ -7,6 +7,7 @@ class RequestsController < ApplicationController
     status = :unauthorized
     if website
       begin
+        bad_request = false
         objects = ActiveSupport::JSON.decode(params[:requests])
         objects.each do |obj|
           obj['view_runtime'] ||= 0
@@ -15,10 +16,10 @@ class RequestsController < ApplicationController
             website.requests.create!(obj)
           rescue
             logger.warn('INVALID OBJECT: ' + obj.to_s)
-            raise
+            bad_request = true
           end
         end
-        status = :ok
+        status = bad_request ? :bad_request : :ok
       rescue Exception => e
         status = :bad_request
         logger.warn e.inspect

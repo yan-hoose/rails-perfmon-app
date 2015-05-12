@@ -47,19 +47,19 @@ RSpec.describe RequestsController, :type => :controller do
         post :create, api_key: @website.api_key, requests: 'totally not valid here'
       end
 
-      it 'stops inserting after invalid request data is encountered (missing controller)' do
+      it 'keeps trying to insert data after invalid request data is encountered (missing controller)' do
         reqs << FactoryGirl.build(:request, controller: nil) << FactoryGirl.build(:request)
         expect {
           post :create, api_key: @website.api_key, requests: reqs.to_json
-        }.to change(Request, :count).by(1)
+        }.to change(Request, :count).by(2)
         expect(@website.requests.all?{ |e| e.controller.present? }).to be true
       end
 
-      it 'stops inserting after invalid request data is encountered (invalid time)' do
+      it 'keeps trying to insert data after invalid request data is encountered (invalid time)' do
         reqs << FactoryGirl.build(:request, time: 'string, not time') << FactoryGirl.build(:request)
         expect {
           post :create, api_key: @website.api_key, requests: reqs.to_json
-        }.to change(Request, :count).by(1)
+        }.to change(Request, :count).by(2)
       end
 
       it 'ingores random json' do
