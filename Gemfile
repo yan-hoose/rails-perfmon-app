@@ -27,6 +27,8 @@ gem 'therubyracer'
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.0.3'
 
+gem 'highcharts-rails', '~> 4.1.5'
+
 gem 'devise', '~> 3.4.1'
 
 gem 'dotenv-rails', groups: [:development, :test]
