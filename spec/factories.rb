@@ -26,6 +26,7 @@ FactoryGirl.define do
     db_runtime 29.2349
     total_runtime 58.2393
     time Time.now
+    params { {'param1' => '5', 'param2' => 'true'} }
   end
 
   factory :note do

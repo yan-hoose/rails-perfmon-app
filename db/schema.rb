@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427123914) do
+ActiveRecord::Schema.define(version: 20151230100812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20150427123914) do
     t.float    "db_runtime",                null: false
     t.float    "total_runtime",             null: false
     t.datetime "time",                      null: false
+    t.json     "params"
   end
 
   add_index "requests", ["website_id"], name: "index_requests_on_website_id", using: :btree
