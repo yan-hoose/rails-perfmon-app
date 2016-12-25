@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230100812) do
+ActiveRecord::Schema.define(version: 20161225201718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20151230100812) do
     t.json     "params"
   end
 
-  add_index "requests", ["website_id"], name: "index_requests_on_website_id", using: :btree
+  add_index "requests", ["website_id", "time"], name: "index_requests_on_website_id_and_time", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, null: false
