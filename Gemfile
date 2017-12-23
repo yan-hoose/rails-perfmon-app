@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.10'
 
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'pg', '0.20.0'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.11'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -25,11 +25,11 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.0.3'
+gem 'jquery-rails', '~> 4.3.1'
 
 gem 'highcharts-rails', '~> 4.1.5'
 
-gem 'devise', '~> 3.4.1'
+gem 'devise', '~> 3.5.10'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
@@ -39,10 +39,10 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.7.2'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'capybara', '~> 2.4.4'
-  gem 'selenium-webdriver', '~> 2.45'
+  gem 'selenium-webdriver', '~> 3.8.0'
   gem 'database_cleaner', '~> 1.4'
   gem 'simplecov', require: false
 end

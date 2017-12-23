@@ -27,15 +27,15 @@ RSpec.describe NotesController, :type => :controller do
       it 'requires start and end parameters' do
         expect {
           get :index, website_id: @website.id, format: :json
-        }.to raise_error
+        }.to raise_error(NoMethodError)
 
         expect {
           get :index, website_id: @website.id, format: :json, start: Date.today - 1
-        }.to raise_error
+        }.to raise_error(NoMethodError)
 
         expect {
           get :index, website_id: @website.id, format: :json, end: Date.today
-        }.to raise_error
+        }.to raise_error(NoMethodError)
 
         expect {
           get :index, website_id: @website.id, format: :json, start: Date.today - 1, end: Date.today
@@ -45,15 +45,15 @@ RSpec.describe NotesController, :type => :controller do
       it 'requires start and end parameters to be dates' do
         expect {
           get :index, website_id: @website.id, format: :json, start: 'string'
-        }.to raise_error
+        }.to raise_error(ArgumentError)
 
         expect {
           get :index, website_id: @website.id, format: :json, end: 9128419
-        }.to raise_error
+        }.to raise_error(NoMethodError)
 
         expect {
           get :index, website_id: @website.id, format: :json, start: [], end: 'not date'
-        }.to raise_error
+        }.to raise_error(NoMethodError)
       end
 
       context 'time zone differences' do
