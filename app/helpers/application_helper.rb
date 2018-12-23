@@ -54,4 +54,8 @@ module ApplicationHelper
     link_to 'Back', :back, class: 'btn btn-default btn-back'
   end
 
+  def safe_params
+    params.except(:host, :port, :protocol).permit!
+  end
+
 end

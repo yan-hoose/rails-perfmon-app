@@ -65,9 +65,9 @@ module ReportsHelper
 
   def filter_link(website_request)
     html = ''.html_safe
-    html << link_to(website_request.controller, url_for(params.merge(contr: website_request.controller)))
+    html << link_to(website_request.controller, url_for(safe_params.merge(contr: website_request.controller)))
     html << '#'.html_safe
-    html << link_to(website_request.action, url_for(params.merge(act: website_request.action)))
+    html << link_to(website_request.action, url_for(safe_params.merge(act: website_request.action)))
     html
   end
 

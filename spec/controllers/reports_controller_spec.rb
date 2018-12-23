@@ -9,17 +9,17 @@ RSpec.describe ReportsController, :type => :controller do
 
   context 'report data collection' do
     before(:each) do
-      @website.requests << FactoryGirl.create(:request, controller: 'PostsController', action: 'index',
+      FactoryGirl.create(:request, website: @website, controller: 'PostsController', action: 'index',
         method: 'GET', status: 200, db_runtime: 150, view_runtime: 70, total_runtime: 400)
-      @website.requests << FactoryGirl.create(:request, controller: 'PostsController', action: 'index',
+      FactoryGirl.create(:request, website: @website, controller: 'PostsController', action: 'index',
         method: 'GET', status: 304, db_runtime: 100, view_runtime: 90, total_runtime: 250)
-      @website.requests << FactoryGirl.create(:request, controller: 'PostsController', action: 'index',
+      FactoryGirl.create(:request, website: @website, controller: 'PostsController', action: 'index',
         method: 'GET', status: 200, db_runtime: 90, view_runtime: 190, total_runtime: 370)
-      @website.requests << FactoryGirl.create(:request, controller: 'PostsController', action: 'create',
+      FactoryGirl.create(:request, website: @website, controller: 'PostsController', action: 'create',
         method: 'POST', status: 200, db_runtime: 600, view_runtime: 120, total_runtime: 1050)
-      @website.requests << FactoryGirl.create(:request, controller: 'CommentsController', action: 'index',
+      FactoryGirl.create(:request, website: @website, controller: 'CommentsController', action: 'index',
         method: 'GET', status: 200, db_runtime: 120, view_runtime: 140, total_runtime: 380)
-      @website.requests << FactoryGirl.create(:request, controller: 'CommentsController', action: 'index',
+      FactoryGirl.create(:request, website: @website, controller: 'CommentsController', action: 'index',
         method: 'GET', status: 200, db_runtime: 110, view_runtime: 110, total_runtime: 280)
 
       expect(controller).to receive(:set_website).and_call_original
@@ -33,7 +33,7 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gathers data for GET #overview' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :overview, website_id: @website.id
+      get :overview, params: {website_id: @website.id}
 
       result_data = assigns(:result_data)
       expect(result_data).to_not be_nil
@@ -68,14 +68,14 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gathers data for GET #request_durations' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :request_durations, website_id: @website.id
+      get :request_durations, params: {website_id: @website.id}
 
       result_data = assigns(:result_data)
       expect(result_data).to_not be_nil
       expect(result_data.tabular_data.length).to eq(3)
       sort_result_data(result_data)
 
-      row = result_data.tabular_data[0]
+      row = result_data.tabular_data.find { |row| row.controller == 'PostsController' && row.action == 'create' }
       expect(row.controller).to eq('PostsController')
       expect(row.action).to eq('create')
       expect(row.hits).to eq(1)
@@ -84,7 +84,7 @@ RSpec.describe ReportsController, :type => :controller do
       expect(row.min).to eq(1050)
       expect(row.max).to eq(1050)
 
-      row = result_data.tabular_data[1]
+      row = result_data.tabular_data.find { |row| row.controller == 'PostsController' && row.action == 'index' }
       expect(row.controller).to eq('PostsController')
       expect(row.action).to eq('index')
       expect(row.hits).to eq(3)
@@ -93,7 +93,7 @@ RSpec.describe ReportsController, :type => :controller do
       expect(row.min).to eq(250)
       expect(row.max).to eq(400)
 
-      row = result_data.tabular_data[2]
+      row = result_data.tabular_data.find { |row| row.controller == 'CommentsController' && row.action == 'index' }
       expect(row.controller).to eq('CommentsController')
       expect(row.action).to eq('index')
       expect(row.hits).to eq(2)
@@ -106,14 +106,14 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gathers data for GET #db_time' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :db_time, website_id: @website.id
+      get :db_time, params: {website_id: @website.id}
 
       result_data = assigns(:result_data)
       expect(result_data).to_not be_nil
       expect(result_data.tabular_data.length).to eq(3)
       sort_result_data(result_data)
 
-      row = result_data.tabular_data[0]
+      row = result_data.tabular_data.find { |row| row.controller == 'PostsController' && row.action == 'create' }
       expect(row.controller).to eq('PostsController')
       expect(row.action).to eq('create')
       expect(row.hits).to eq(1)
@@ -122,7 +122,7 @@ RSpec.describe ReportsController, :type => :controller do
       expect(row.min).to eq(600)
       expect(row.max).to eq(600)
 
-      row = result_data.tabular_data[1]
+      row = result_data.tabular_data.find { |row| row.controller == 'PostsController' && row.action == 'index' }
       expect(row.controller).to eq('PostsController')
       expect(row.action).to eq('index')
       expect(row.hits).to eq(3)
@@ -131,7 +131,7 @@ RSpec.describe ReportsController, :type => :controller do
       expect(row.min).to eq(90)
       expect(row.max).to eq(150)
 
-      row = result_data.tabular_data[2]
+      row = result_data.tabular_data.find { |row| row.controller == 'CommentsController' && row.action == 'index' }
       expect(row.controller).to eq('CommentsController')
       expect(row.action).to eq('index')
       expect(row.hits).to eq(2)
@@ -144,14 +144,14 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gathers data for GET #view_time' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :view_time, website_id: @website.id
+      get :view_time, params: {website_id: @website.id}
 
       result_data = assigns(:result_data)
       expect(result_data).to_not be_nil
       expect(result_data.tabular_data.length).to eq(3)
       sort_result_data(result_data)
 
-      row = result_data.tabular_data[0]
+      row = result_data.tabular_data.find { |row| row.controller == 'PostsController' && row.action == 'index' }
       expect(row.controller).to eq('PostsController')
       expect(row.action).to eq('index')
       expect(row.hits).to eq(3)
@@ -160,7 +160,7 @@ RSpec.describe ReportsController, :type => :controller do
       expect(row.min).to eq(70)
       expect(row.max).to eq(190)
 
-      row = result_data.tabular_data[1]
+      row = result_data.tabular_data.find { |row| row.controller == 'CommentsController' && row.action == 'index' }
       expect(row.controller).to eq('CommentsController')
       expect(row.action).to eq('index')
       expect(row.hits).to eq(2)
@@ -169,7 +169,7 @@ RSpec.describe ReportsController, :type => :controller do
       expect(row.min).to eq(110)
       expect(row.max).to eq(140)
 
-      row = result_data.tabular_data[2]
+      row = result_data.tabular_data.find { |row| row.controller == 'PostsController' && row.action == 'create' }
       expect(row.controller).to eq('PostsController')
       expect(row.action).to eq('create')
       expect(row.hits).to eq(1)
@@ -186,7 +186,7 @@ RSpec.describe ReportsController, :type => :controller do
 
       expect(controller).to receive(:set_blocker_result_data).once.and_call_original
 
-      get :blockers, website_id: @website.id
+      get :blockers, params: {website_id: @website.id}
       expect(assigns(:overall_blocker_count)).to eq(3)
 
       result_data = assigns(:result_data)
@@ -207,7 +207,7 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gets #nr_of_requests_chart json' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :nr_of_requests_chart, website_id: @website.id, format: :json
+      get :nr_of_requests_chart, params: {website_id: @website.id}, format: :json
 
       data = JSON.parse(response.body)
       data['data'].each do |req|
@@ -218,7 +218,7 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gets #avg_request_duration_chart json' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :avg_request_duration_chart, website_id: @website.id, format: :json
+      get :avg_request_duration_chart, params: {website_id: @website.id}, format: :json
 
       data = JSON.parse(response.body)
       data['data'].each do |req|
@@ -232,7 +232,7 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gets #db_time_chart json' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :db_time_chart, website_id: @website.id, format: :json
+      get :db_time_chart, params: {website_id: @website.id}, format: :json
 
       data = JSON.parse(response.body)
       data['data'].each do |req|
@@ -243,7 +243,7 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gets #view_time_chart json' do
       expect(controller).to receive(:set_result_data).once.and_call_original
 
-      get :view_time_chart, website_id: @website.id, format: :json
+      get :view_time_chart, params: {website_id: @website.id}, format: :json
 
       data = JSON.parse(response.body)
       data['data'].each do |req|
@@ -254,7 +254,7 @@ RSpec.describe ReportsController, :type => :controller do
     it 'gets #blocker_count_chart json' do
       expect(controller).to receive(:set_blocker_result_data).once.and_call_original
 
-      get :blocker_count_chart, website_id: @website.id, format: :json
+      get :blocker_count_chart, params: {website_id: @website.id}, format: :json
 
       data = JSON.parse(response.body)
       data['data'].each do |req|
@@ -271,14 +271,14 @@ RSpec.describe ReportsController, :type => :controller do
         @website.requests << FactoryGirl.create(:request, controller: 'PostsController', action: 'create',
           method: 'POST', status: 200, db_runtime: 10, view_runtime: 7, total_runtime: 1000, time: Time.now - 5.days)
       end
-      let(:params_hash) { {
+      let(:params_hash) { {params: {
         website_id: @website.id,
         start: Date.today - 1.day,
         end: Date.today,
         compare_periods: true,
         comparison_start: Date.today - 6.days,
         comparison_end: Date.today - 4.days
-      } }
+      }} }
 
       it 'gathers data for GET #overview' do
         get :overview, params_hash
@@ -384,7 +384,7 @@ RSpec.describe ReportsController, :type => :controller do
     it 'scopes the query to current users websites' do
       expect_any_instance_of(ReportsController).to receive(:set_website).twice.and_call_original
 
-      get :overview, website_id: @website.id
+      get :overview, params: {website_id: @website.id}
       expect(assigns(:website)).to eq(@website)
 
       other_user = FactoryGirl.create(:user)
@@ -392,7 +392,7 @@ RSpec.describe ReportsController, :type => :controller do
       FactoryGirl.create(:users_website, website: other_website, user: other_user)
 
       expect {
-        get :overview, website_id: other_website.id
+        get :overview, params: {website_id: other_website.id}
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
@@ -428,7 +428,7 @@ RSpec.describe ReportsController, :type => :controller do
 
       somebody_else = FactoryGirl.create(:user)
       somebody_elses_website = FactoryGirl.create(:website)
-      FactoryGirl.create(:users_website, user: somebody_else, website: somebody_elses_website)      
+      FactoryGirl.create(:users_website, user: somebody_else, website: somebody_elses_website)
 
       expect(ReportsDataGatherer).to receive(:new).exactly(3).times.and_call_original
 

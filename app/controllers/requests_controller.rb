@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   protect_from_forgery except: :create
-  before_action :authenticate_user!, :set_user_time_zone, except: [:create] 
+  before_action :authenticate_user!, :set_user_time_zone, except: [:create]
 
   def create
     website = Website.find_by(api_key: params[:api_key])
@@ -25,7 +25,7 @@ class RequestsController < ApplicationController
         logger.warn e.inspect
       end
     end
-    render nothing: true, status: status
+    head status
   end
 
 end

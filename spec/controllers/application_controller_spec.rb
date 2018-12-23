@@ -2,7 +2,7 @@ require "rails_helper"
 
 class TestApplicationController < ApplicationController
   def index
-    render nothing: true
+    head :ok
   end
 end
 

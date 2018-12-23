@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.11'
+gem 'rails', '5.0.7.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '0.20.0'
@@ -19,7 +19,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '4.2.2'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer'
@@ -45,4 +45,5 @@ group :test do
   gem 'selenium-webdriver', '~> 3.8.0'
   gem 'database_cleaner', '~> 1.4'
   gem 'simplecov', require: false
+  gem 'rails-controller-testing'
 end

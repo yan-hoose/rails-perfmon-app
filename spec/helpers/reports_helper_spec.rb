@@ -93,21 +93,21 @@ RSpec.describe ReportsHelper, :type => :helper do
     let(:request_data) { Struct::Request.new('PostsController', 'index') }
 
     it 'creates a filter link' do
-      allow(helper).to receive(:params).and_return({controller: 'reports', action: 'request_durations', website_id: website.id})
+      allow(helper).to receive(:params).and_return(ActionController::Parameters.new({controller: 'reports', action: 'request_durations', website_id: website.id}))
 
       html = helper.filter_link(request_data)
       expect(html).to eq("<a href=\"/websites/#{website.id}/reports/request_durations?contr=PostsController\">PostsController</a>#<a href=\"/websites/#{website.id}/reports/request_durations?act=index\">index</a>")
     end
 
     it 'merges already set controller filters' do
-      allow(helper).to receive(:params).and_return({controller: 'reports', action: 'request_durations', website_id: website.id, contr: 'CommentsController'})
+      allow(helper).to receive(:params).and_return(ActionController::Parameters.new({controller: 'reports', action: 'request_durations', website_id: website.id, contr: 'CommentsController'}))
 
       html = helper.filter_link(request_data)
       expect(html).to eq("<a href=\"/websites/#{website.id}/reports/request_durations?contr=PostsController\">PostsController</a>#<a href=\"/websites/#{website.id}/reports/request_durations?act=index&amp;contr=CommentsController\">index</a>")
     end
 
     it 'merges already set action filters' do
-      allow(helper).to receive(:params).and_return({controller: 'reports', action: 'request_durations', website_id: website.id, act: 'update'})
+      allow(helper).to receive(:params).and_return(ActionController::Parameters.new({controller: 'reports', action: 'request_durations', website_id: website.id, act: 'update'}))
 
       html = helper.filter_link(request_data)
       expect(html).to eq("<a href=\"/websites/#{website.id}/reports/request_durations?act=update&amp;contr=PostsController\">PostsController</a>#<a href=\"/websites/#{website.id}/reports/request_durations?act=index\">index</a>")

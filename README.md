@@ -14,9 +14,9 @@ This app works in conjunction with the [data collecting gem](https://github.com/
 
 This app wants/prefers:
 
-* Ruby 2.2 (2.0 and 2.1 will probably work too but I have not tested it on these versions).
+* Ruby 2.2.2+ (Rails 5 requirement).
 
-* PostgreSQL 9.3 (older 9.x versions will probably work too but again, I have not tested those versions).
+* PostgreSQL 9.5+ (older 9.x versions will probably work too but again, I have not tested those versions).
 
 ### Setup
 
