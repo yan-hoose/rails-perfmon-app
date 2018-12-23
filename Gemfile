@@ -41,8 +41,9 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.7.2'
   gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'capybara', '~> 2.4.4'
-  gem 'selenium-webdriver', '~> 3.8.0'
+  gem 'capybara', '3.12.0'
+  gem 'selenium-webdriver', '3.141.0'
+  gem 'geckodriver-helper', '0.23.0'
   gem 'database_cleaner', '~> 1.4'
   gem 'simplecov', require: false
   gem 'rails-controller-testing'

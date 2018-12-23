@@ -1,8 +1,8 @@
 require "rails_helper"
 
-feature "Log in" do
+describe 'Logging in', type: :feature do
 
-  scenario "Log in through bootstrap modal popup", js: true do
+  it 'Logs in via bootstrap modal form', js: true do
     user = FactoryGirl.create(:user, password: '123123123')
     visit root_path
     click_link 'Log in'
