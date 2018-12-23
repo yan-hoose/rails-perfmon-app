@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '4.2.11'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '0.20.0'
@@ -25,11 +25,11 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.3.1'
+gem 'jquery-rails', '~> 4.3.3'
 
 gem 'highcharts-rails', '~> 4.1.5'
 
-gem 'devise', '~> 3.5.10'
+gem 'devise', '4.5.0'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
