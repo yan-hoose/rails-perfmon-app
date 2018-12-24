@@ -49,7 +49,7 @@ RSpec.describe ReportsDataGatherer do
   describe '#select_fields' do
     it 'runs #generate_tabular_data on @current_period_data' do
       gatherer = ReportsDataGatherer.new(@website, params, session)
-      
+
       expect(gatherer.instance_variable_get(:@current_period_data)).
         to receive(:generate_tabular_data).with('max ASC', any_args).and_call_original
 
@@ -61,7 +61,7 @@ RSpec.describe ReportsDataGatherer do
 
     it 'runs #generate_tabular_data on @comparison_period_data and generates comparison hash when comparing periods' do
       gatherer = ReportsDataGatherer.new(@website, params.merge(compare_periods: true), session)
-      
+
       expect(gatherer.instance_variable_get(:@current_period_data)).to receive(:generate_tabular_data).once
       expect(gatherer.instance_variable_get(:@comparison_period_data)).
         to receive(:generate_tabular_data).once.with('max ASC', any_args).and_call_original
@@ -77,7 +77,7 @@ RSpec.describe ReportsDataGatherer do
       it 'loads comparison data and creates @comparison_data_hash when comparing periods' do
         FactoryGirl.create(:request, time: Time.now - 8.days)
         gatherer = ReportsDataGatherer.new(@website, {compare_periods: true, comparison_start: Date.today - 8.days, comparison_end: Date.today - 8.days}, session)
-        
+
         gatherer.select_fields do
           select('controller, action')
         end
@@ -165,17 +165,17 @@ RSpec.describe ReportsDataGatherer do
   describe '#get_filters' do
     it 'creates filters based on params if params defined' do
       params = {
-        start: Date.today - 7.days,
-        end: Date.today,
+        start_date: Date.today - 3.days,
+        end_date: Date.today,
         compare_periods: true,
-        comparison_start: Date.today - 14.days,
+        comparison_start: Date.today - 11.days,
         comparison_end: Date.today - 8.days,
         contr: 'PostsController',
         act: 'index'
       }
-      gatherer = ReportsDataGatherer.new(@website, params, session)
-      expect(gatherer.filters[:start_date]).to eq(params[:start])
-      expect(gatherer.filters[:end_date]).to eq(params[:end])
+      gatherer = ReportsDataGatherer.new(@website, params, {})
+      expect(gatherer.filters[:start_date]).to eq(params[:start_date])
+      expect(gatherer.filters[:end_date]).to eq(params[:end_date])
       expect(gatherer.filters[:compare_periods]).to eq(params[:compare_periods])
       expect(gatherer.filters[:comparison_start_date]).to eq(params[:comparison_start])
       expect(gatherer.filters[:comparison_end_date]).to eq(params[:comparison_end])
@@ -185,10 +185,10 @@ RSpec.describe ReportsDataGatherer do
 
     it 'takes filters from the session if params not defined' do
       session[:query_filters] = {
-        start_date: Date.today - 7.days,
-        end_date: Date.today,
+        start_date: Date.today - 5.days,
+        end_date: Date.today - 1.day,
         compare_periods: true,
-        comparison_start_date: Date.today - 14.days,
+        comparison_start_date: Date.today - 12.days,
         comparison_end_date: Date.today - 8.days,
         contr: 'PostsController',
         act: 'index'

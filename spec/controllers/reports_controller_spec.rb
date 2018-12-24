@@ -445,8 +445,8 @@ RSpec.describe ReportsController, :type => :controller do
     it 'creates the report data gatherer objects with specific filters' do
       expect(ReportsDataGatherer).to receive(:new).with(@website, {
         dashboard: 'true',
-        start: Date.today - 2.days,
-        end: Date.today,
+        start_date: Date.today - 2.days,
+        end_date: Date.today,
         compare_periods: false,
         contr: '',
         act: ''

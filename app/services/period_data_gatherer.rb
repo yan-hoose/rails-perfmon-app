@@ -33,7 +33,7 @@ class PeriodDataGatherer
       @nth_percentile = Request.count_by_sql %Q{
         WITH runtimes AS (#{sub_sql})
         SELECT total_runtime::int
-        FROM runtimes 
+        FROM runtimes
         WHERE percentile >= 0.95
         LIMIT 1
       }

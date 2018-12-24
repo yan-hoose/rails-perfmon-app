@@ -13,7 +13,7 @@ $(document).ready(function() {
   var sortable_table = $('#sum_avg_min_max_table').get(0);
 
   if (sortable_table) {
-    new Tablesort(sortable_table, {descending: true});  
+    new Tablesort(sortable_table, {descending: true});
   }
 
   function generateChartsIfPresent() {
@@ -387,7 +387,7 @@ $(document).ready(function() {
             pointInterval: 1 * hour,
             pointStart: start_time
           }
-        }           
+        }
       };
       var options = $.extend(default_options, chart_options);
       var series = {series: []};
@@ -404,7 +404,7 @@ $(document).ready(function() {
   function generateChartDataPoints(chart_data, start_time, end_time, data, add_data_callback) {
     var time_index = start_time;
     while (time_index <= end_time) {
-      row = data[0];
+      var row = data[0];
       if (row && row.timespan * 1000 == time_index) {
         add_data_callback(chart_data, row);
         data.shift();
@@ -439,7 +439,7 @@ $(document).ready(function() {
       }).mouseout(function() {
         hideNote($(this).attr('data-id'));
       });
-    }, 'json');    
+    }, 'json');
   }
 
   function displayNote(chart_object, label_tag, mouse_event) {
@@ -463,8 +463,8 @@ $(document).ready(function() {
     $('#comparison-daterange span.daterange-str').html(comparison_start + ' - ' + comparison_end);
 
     var filters = {
-      start: start,
-      end: end,
+      start_date: start,
+      end_date: end,
       compare_periods: compare_periods,
       comparison_start: comparison_start,
       comparison_end: comparison_end,
@@ -505,7 +505,7 @@ $(document).ready(function() {
     function(start, end) {
       applyDateFilters(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'), compare_periods_checkbox.prop('checked'),
         $('#comparison-start-date').val(), $('#comparison-end-date').val());
-    } 
+    }
   );
   $('#daterange').on('apply.daterangepicker', function(ev, picker) {
     applyDateFilters(picker.startDate.format('YYYY-MM-DD'), picker.endDate.format('YYYY-MM-DD'), compare_periods_checkbox.prop('checked'),

@@ -46,13 +46,13 @@ class ReportsDataGatherer
     compare_periods = params[:compare_periods] || session[filters_key][:compare_periods]
 
     session[filters_key] = {
-      start_date: set_date_filter_value(params[:start] || session[filters_key][:start_date], Date.today - 7.days),
-      end_date: set_date_filter_value(params[:end] || session[filters_key][:end_date], Date.today),
+      start_date: set_date_filter_value(params[:start_date] || session[filters_key]['start_date'], Date.today - 7.days),
+      end_date: set_date_filter_value(params[:end_date] || session[filters_key]['end_date'], Date.today),
       compare_periods: compare_periods.is_a?(String) ? compare_periods == 'true' : compare_periods,
-      comparison_start_date: set_date_filter_value(params[:comparison_start] || session[filters_key][:comparison_start_date], Date.today - 14.days),
-      comparison_end_date: set_date_filter_value(params[:comparison_end] || session[filters_key][:comparison_end_date], Date.today - 8.days),
-      contr: params[:contr] || session[filters_key][:contr],
-      act: params[:act] || session[filters_key][:act]
+      comparison_start_date: set_date_filter_value(params[:comparison_start] || session[filters_key]['comparison_start_date'], Date.today - 14.days),
+      comparison_end_date: set_date_filter_value(params[:comparison_end] || session[filters_key]['comparison_end_date'], Date.today - 8.days),
+      contr: params[:contr] || session[filters_key]['contr'],
+      act: params[:act] || session[filters_key]['act']
     }
   end
 

@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
     @reports = {}
     current_user.websites.each do |website|
       @reports[website.id] = ReportsDataGatherer.new(website,
-        {dashboard: 'true', start: Date.today - 2.days, end: Date.today, compare_periods: false, contr: '', act: ''},
+        {dashboard: 'true', start_date: Date.today - 2.days, end_date: Date.today, compare_periods: false, contr: '', act: ''},
         session)
     end
   end
