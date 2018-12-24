@@ -26,7 +26,7 @@ RSpec.describe ReportsController, :type => :controller do
     end
 
     after(:each) do
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:website)).to eq(@website)
     end
 

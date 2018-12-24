@@ -11,7 +11,7 @@ RSpec.describe NotesController, :type => :controller do
     context 'HTML request' do
       it 'responds with HTML' do
         get :index, params: {website_id: @website.id}
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response).to render_template(:index)
       end
     end
@@ -19,7 +19,7 @@ RSpec.describe NotesController, :type => :controller do
     context 'JSON request' do
       it 'responds with JSON' do
         get :index, params: {website_id: @website.id, format: :json, start: Date.today - 1, end: Date.today}
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response).to_not render_template(:index)
         expect { JSON.parse(response.body) }.to_not raise_error
       end

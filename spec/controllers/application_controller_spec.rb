@@ -24,13 +24,13 @@ RSpec.describe TestApplicationController, :type => :controller do
     it 'checks for authentication' do
       expect(controller).to receive(:authenticate_user!).once.and_call_original
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'calls set_user_time_zone' do
       expect(controller).to receive(:set_user_time_zone).once
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     describe '#set_user_time_zone' do

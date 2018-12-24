@@ -10,7 +10,8 @@ class PeriodDataGatherer
   end
 
   def generate_tabular_data(sort_order = nil, &block)
-    @tabular_data = @filtered_rows.instance_eval(&block).order(sort_order)
+    @tabular_data = @filtered_rows.instance_eval(&block)
+    @tabular_data = @tabular_data.order(Arel.sql(sort_order)) if sort_order.present?
   end
 
   def chart_data(select_fields)

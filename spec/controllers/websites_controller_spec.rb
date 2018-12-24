@@ -12,7 +12,7 @@ RSpec.describe WebsitesController, :type => :controller do
       get :new
       expect(assigns(:website)).to_not be_nil
       expect(assigns(:website).new_record?).to be(true)
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response).to have_http_status(200)
       expect(response).to render_template(:new)
     end
@@ -44,7 +44,7 @@ RSpec.describe WebsitesController, :type => :controller do
     it 'responds successfully with an edit template' do
       get :edit, params: {id: @website.id}
       expect(assigns(:website)).to eq(@website)
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response).to have_http_status(200)
       expect(response).to render_template(:edit)
     end
