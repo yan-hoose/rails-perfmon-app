@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.7.1'
+gem 'rails', '5.1.6.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '0.20.0'
@@ -27,15 +27,20 @@ gem 'therubyracer'
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.3.3'
 
-gem 'highcharts-rails', '~> 4.1.5'
+gem 'highcharts-rails', '4.1.5'
 
 gem 'devise', '4.5.0'
 
-gem 'dotenv-rails', groups: [:development, :test]
+group :development, :test do
+  gem 'dotenv-rails'
+  gem 'byebug'
+end
 
 group :development do
   gem 'capistrano-rails'
   gem 'spring'
+  gem 'listen'
+  gem 'puma', '3.12.0'
 end
 
 group :test do
@@ -44,7 +49,7 @@ group :test do
   gem 'capybara', '3.12.0'
   gem 'selenium-webdriver', '3.141.0'
   gem 'geckodriver-helper', '0.23.0'
-  gem 'database_cleaner', '~> 1.4'
+  gem 'database_cleaner', '1.7.0'
   gem 'simplecov', require: false
   gem 'rails-controller-testing'
 end

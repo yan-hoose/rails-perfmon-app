@@ -42,6 +42,11 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
+  # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
+  # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
+  # `config/secrets.yml.key`.
+  config.read_encrypted_secrets = true
+
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug

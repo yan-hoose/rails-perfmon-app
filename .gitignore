@@ -18,3 +18,4 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.byebug_history
