@@ -22,7 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '4.2.2'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer'
+gem 'therubyracer', '0.12.3'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.3.3'
@@ -37,6 +37,15 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug'
+
+  gem 'rspec-rails', '3.8.1'
+  gem 'simplecov', '0.16.1', require: false
+  gem 'capybara', '3.12.0'
+  gem 'selenium-webdriver', '3.141.0'
+  gem 'geckodriver-helper', '0.23.0'
+  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'database_cleaner', '1.7.0'
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -44,15 +53,4 @@ group :development do
   gem 'spring'
   gem 'listen'
   gem 'puma', '3.12.0'
-end
-
-group :test do
-  gem 'rspec-rails', '~> 3.7.2'
-  gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'capybara', '3.12.0'
-  gem 'selenium-webdriver', '3.141.0'
-  gem 'geckodriver-helper', '0.23.0'
-  gem 'database_cleaner', '1.7.0'
-  gem 'simplecov', require: false
-  gem 'rails-controller-testing'
 end
