@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '5.2.2'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '0.20.0'
+gem 'pg', '1.1.3'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.11'
